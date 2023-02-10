@@ -17,7 +17,6 @@ public class Board implements Serializable {
         this.boardDate = today;
         this.boardContent = stringBuilder.toString();
         this.readCount = 0;
-
     }
 
 

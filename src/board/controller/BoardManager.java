@@ -59,13 +59,12 @@ public class BoardManager {
             stringBuilder.append(tmp).append("\n");
         }
         list.add(new Board(title,name,today,stringBuilder));
-
-
-
-
+        System.out.println(list.get(0));
 
 
     }
+
+
 
 
 
