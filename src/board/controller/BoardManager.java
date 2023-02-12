@@ -1,10 +1,8 @@
 package board.controller;
 
-import board.model.vo.Board;
+import board.model.vo.*;
 
-import java.io.FileInputStream;
-import java.io.IOException;
-import java.io.ObjectInputStream;
+import java.io.*;
 import java.sql.Date;
 import java.util.ArrayList;
 
@@ -64,7 +62,100 @@ public class BoardManager {
 
     }
 
+    public void displayAllList() {
+        for (Board board : list) {
+            System.out.println(board);
+        }
+    }
+    public void displayBoard() {
+        System.out.print("조회 할 글 번호 : ");
+        int no = sc.nextInt();
+        Board b = list.get(no - 1);
+        System.out.println(b);
+        b.setReadCount(b.getReadCount() + 1);
+    }
 
+    public void modifyTitle() {
+        System.out.print("수정할 글 번호 : ");
+        int bNo = sc.nextInt();
+        Board board = list.get(bNo - 1);
+        System.out.println(board);
+        System.out.print("변경할 제목 : ");
+        sc.nextLine();
+        board.setBoardtitle(sc.nextLine());
+        list.set(bNo - 1, board);
+    }
+
+    public void modifyContent() {
+        System.out.print("수정할 글 번호 : ");
+        int bNo = sc.nextInt();
+        Board b = list.get(bNo - 1);
+        System.out.println(b);
+        System.out.print("변경할 내용 : ");
+        sc.nextLine();
+        b.setBoardContent(sc.nextLine());
+        list.set(bNo - 1, b);
+    }
+
+    public void deleteBoard() {
+        System.out.print("삭제할 글 번호 : ");
+        int bNo = sc.nextInt();
+        Board b = list.get(bNo - 1);
+        System.out.print("정말로 삭제하시겠습니까? (y/n) : ");
+        if (sc.next().toUpperCase().charAt(0) == 'Y') {
+            list.remove(bNo - 1);
+            System.out.println(bNo + "번 글이 삭제되었습니다.");
+        }
+    }
+
+    public void searchBoard() {
+        System.out.println("검색할 제목 : ");
+        String title = sc.nextLine();
+
+        for (Board board : list) {
+            if (board.getBoardtitle().contains(title)) {
+                System.out.println(board);
+            }
+        }
+
+    }
+
+    public void saveListFile() {
+        try (ObjectOutputStream oOut = new ObjectOutputStream(new FileOutputStream("board_list.dat"))) {
+            for (int i = 0; i < list.size(); i++) {
+                oOut.writeObject(list.get(i));
+            }
+            oOut.flush();
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+    }
+
+
+    public void sortList(int item, boolean isDesc) {
+        if (item == 1) {
+            if (isDesc) {
+                list.sort(new DescBoardNo());
+
+            }else {
+                list.sort(new AscBoardNo());
+            }
+        } else if (item == 2) {
+            if (isDesc) {
+                list.sort(new DescBoardDate());
+
+            } else {
+                list.sort(new AscBoardDate());
+            }
+        } else if (item == 3) {
+            if (isDesc) {
+                list.sort(new DescBoardTitle());
+
+            } else {
+                list.sort(new AscBoardTitle());
+            }
+        }
+    }
 
 
 

@@ -1,11 +1,12 @@
 package board.run;
 
 import board.controller.BoardManager;
+import board.view.BoardMenu;
 
 public class RunBoard {
     public static void main(String[] args) {
-        BoardManager boardManager = new BoardManager();
-        boardManager.writeBoard();
+        BoardMenu boardMenu = new BoardMenu();
+        boardMenu.mainMenu();
 
     }
 }

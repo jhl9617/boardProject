@@ -81,4 +81,6 @@ public class Board implements Serializable {
                 '}';
     }
 
+    public void setBoardTitle(String nextLine) {
+    }
 }
