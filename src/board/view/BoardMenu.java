@@ -26,7 +26,7 @@ public class BoardMenu {
                     "\t7. 게시글 검색\t\t//\t\tsearchBoard()\n" +
                     "\t8. 파일에 저장하기\t\t//\t\tsaveListFile()\n" +
                     "\t9. 정렬하기\t\t// BookMenu 의 sortSubMenu() 실행\n" +
-                    "\t9. 끝내기\t\t//main() 으로 리턴함");
+                    "\t10. 끝내기\t\t//main() 으로 리턴함");
 
             int input = scanner.nextInt();
             switch (input){

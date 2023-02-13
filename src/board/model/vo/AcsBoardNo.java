@@ -1,13 +1,15 @@
 package board.model.vo;
 
+import board.model.vo.Board;
+
 import java.util.Comparator;
 
-public class AscBoardNo implements Comparator {
+public class AcsBoardNo implements Comparator {
     @Override
     public int compare(Object o1, Object o2) {
         int result = 0;
-        Board b1= (Board) o1;
-        Board b2= (Board) o2;
+        board.model.vo.Board b1= (board.model.vo.Board) o1;
+        board.model.vo.Board b2= (Board) o2;
         if(b1.getBoardNo() ==(b2.getBoardNo())){
             result = 0;
         } else if (b1.getBoardNo() > (b2.getBoardNo())) {

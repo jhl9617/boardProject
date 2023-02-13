@@ -11,12 +11,17 @@ public class Board implements Serializable {
     private String boardContent;
     private int readCount;
 
-    public Board(String title, String name, java.sql.Date today, StringBuilder stringBuilder) {
+    private static int num = 0;
+
+
+
+    public Board(String title, String name, Date today, StringBuilder stringBuilder) {
         this.boardtitle = title;
         this.boardWriter = name;
         this.boardDate = today;
         this.boardContent = stringBuilder.toString();
         this.readCount = 0;
+        this.boardNo = num++;
     }
 
 

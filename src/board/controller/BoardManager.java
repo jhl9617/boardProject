@@ -1,20 +1,21 @@
 package board.controller;
 
 import board.model.vo.*;
+import board.model.vo.AcsBoardNo;
+import board.model.vo.AcsBoardTitle;
 
 import java.io.*;
-import java.sql.Date;
 import java.util.ArrayList;
-
+import java.util.Date;
 import java.util.Scanner;
 
 public class BoardManager {
     ArrayList<Board> list = new ArrayList<Board>();
     Scanner sc = new Scanner(System.in);
 
-    //ë””í´íŠ¸ ìƒì„±ì board_list.dat íŒŒì¼ì˜ ë‚´ìš©ì„ ì½ì–´ì„œ
-    //			listì— ì €ì¥í•¨
-    //			null ë  ë•Œê¹Œì§€ ì €ì¥í•¨
+    //µğÆúÆ® »ı¼ºÀÚ board_list.dat ÆÄÀÏÀÇ ³»¿ëÀ» ÀĞ¾î¼­
+    //			list¿¡ ÀúÀåÇÔ
+    //			null µÉ ¶§±îÁö ÀúÀåÇÔ
 
     public BoardManager() {
         this.list = list;
@@ -23,7 +24,7 @@ public class BoardManager {
                 list.add((Board) objectInputStream.readObject());
 
         } catch (IOException | ClassNotFoundException e) {
-            System.out.println("ì¢…ë£Œ");
+            System.out.println("Á¾·á");
         }
 
     }
@@ -31,26 +32,26 @@ public class BoardManager {
 
 
 
-//	1. ê²Œì‹œê¸€ ì“°ê¸° ë©”ì†Œë“œ
+    //	1. °Ô½Ã±Û ¾²±â ¸Ş¼Òµå
 //    public void writeBoard(){}
-//		>> êµ¬í˜„ë‚´ìš©
-//		1> "ìƒˆ ê²Œì‹œê¸€ ì“°ê¸° ì…ë‹ˆë‹¤." ì¶œë ¥
-//		2> "ê¸€ì œëª© : " >> ì…ë ¥ë°›ìŒ(ê³µë°±í¬í•¨)
-//		3> "ì‘ì„±ì : " >> ì´ë¦„ ì…ë ¥ë°›ìŒ (ê³µë°±ì—†ì´)
-//		4> ì‘ì„±ë‚ ì§œëŠ” í˜„ì¬ ë‚ ì§œë¡œ ì…ë ¥ì²˜ë¦¬í•¨
-//		5> "ê¸€ë‚´ìš© : " >> ì—¬ëŸ¬ ì¤„ë¡œ ì…ë ¥ë°›ìŒ
-//				"exit" ì…ë ¥í•˜ë©´ ì…ë ¥ì¢…ë£Œ
-//		6> Board ê°ì²´ ìƒì„±ì‹œ ì´ˆê¸°ê°’ìœ¼ë¡œ ì‚¬ìš©í•¨
-//		7> listì— ì¶”ê°€í•¨
+//		>> ±¸Çö³»¿ë
+//		1> "»õ °Ô½Ã±Û ¾²±â ÀÔ´Ï´Ù." Ãâ·Â
+//		2> "±ÛÁ¦¸ñ : " >> ÀÔ·Â¹ŞÀ½(°ø¹éÆ÷ÇÔ)
+//		3> "ÀÛ¼ºÀÚ : " >> ÀÌ¸§ ÀÔ·Â¹ŞÀ½ (°ø¹é¾øÀÌ)
+//		4> ÀÛ¼º³¯Â¥´Â ÇöÀç ³¯Â¥·Î ÀÔ·ÂÃ³¸®ÇÔ
+//		5> "±Û³»¿ë : " >> ¿©·¯ ÁÙ·Î ÀÔ·Â¹ŞÀ½
+//				"exit" ÀÔ·ÂÇÏ¸é ÀÔ·ÂÁ¾·á
+//		6> Board °´Ã¼ »ı¼º½Ã ÃÊ±â°ªÀ¸·Î »ç¿ëÇÔ
+//		7> list¿¡ Ãß°¡ÇÔ
     public void writeBoard() {
-        System.out.print("ìƒˆ ê²Œì‹œë¬¼ ì“°ê¸° ì…ë‹ˆë‹¤.\nê¸€ ì œëª© :");
+        System.out.print("»õ °Ô½Ã¹° ¾²±â ÀÔ´Ï´Ù.\n±Û Á¦¸ñ :");
         String title = sc.nextLine();
-        System.out.print("ì‘ì„±ì :");
+        System.out.print("ÀÛ¼ºÀÚ :");
         String name = sc.next();
-        Date today = new Date(System.currentTimeMillis());
-        System.out.println("í…ŒìŠ¤íŠ¸ìš© í˜„ì¬ì‹œê°„" + today.toString());
+        Date today = new Date();
+        System.out.println("Å×½ºÆ®¿ë ÇöÀç½Ã°£" + today);
 
-        System.out.print("ê¸€ ë‚´ìš© : ");
+        System.out.print("±Û ³»¿ë : ");
         String tmp = null;
         StringBuilder stringBuilder = new StringBuilder();
         while(!(tmp = sc.nextLine()).equals("exit")){
@@ -68,7 +69,7 @@ public class BoardManager {
         }
     }
     public void displayBoard() {
-        System.out.print("ì¡°íšŒ í•  ê¸€ ë²ˆí˜¸ : ");
+        System.out.print("Á¶È¸ ÇÒ ±Û ¹øÈ£ : ");
         int no = sc.nextInt();
         Board b = list.get(no - 1);
         System.out.println(b);
@@ -76,40 +77,58 @@ public class BoardManager {
     }
 
     public void modifyTitle() {
-        System.out.print("ìˆ˜ì •í•  ê¸€ ë²ˆí˜¸ : ");
-        int bNo = sc.nextInt();
-        Board board = list.get(bNo - 1);
-        System.out.println(board);
-        System.out.print("ë³€ê²½í•  ì œëª© : ");
-        sc.nextLine();
-        board.setBoardtitle(sc.nextLine());
-        list.set(bNo - 1, board);
+        try {
+            System.out.print("¼öÁ¤ÇÒ ±Û ¹øÈ£ : ");
+            int bNo = sc.nextInt();
+            Board board = list.get(bNo);
+            System.out.println(board);
+            System.out.print("º¯°æÇÒ Á¦¸ñ : ");
+            sc.nextLine();
+            board.setBoardtitle(sc.nextLine());
+            list.set(bNo, board);
+        }catch (IndexOutOfBoundsException e) {
+            System.out.println("ÇØ´ç ¹øÈ£°¡ ¾ø½À´Ï´Ù.");
+        }
+
     }
 
     public void modifyContent() {
-        System.out.print("ìˆ˜ì •í•  ê¸€ ë²ˆí˜¸ : ");
-        int bNo = sc.nextInt();
-        Board b = list.get(bNo - 1);
-        System.out.println(b);
-        System.out.print("ë³€ê²½í•  ë‚´ìš© : ");
-        sc.nextLine();
-        b.setBoardContent(sc.nextLine());
-        list.set(bNo - 1, b);
+        try {
+            System.out.print("¼öÁ¤ÇÒ ±Û ¹øÈ£ : ");
+            int bNo = sc.nextInt();
+            Board b = list.get(bNo);
+            System.out.println(b);
+            System.out.print("º¯°æÇÒ ³»¿ë : ");
+
+
+            String tmp = null;
+            StringBuilder stringBuilder = new StringBuilder();
+            while(!(tmp = sc.nextLine()).equals("exit")){
+                stringBuilder.append(tmp).append("\n");
+            }
+
+
+            b.setBoardContent(String.valueOf(stringBuilder));
+            list.set(bNo, b);
+        } catch (IndexOutOfBoundsException e){
+            System.out.println("ÇØ´ç ±Û ¹øÈ£°¡ ¾ø½À´Ï´Ù");
+        }
+
     }
 
     public void deleteBoard() {
-        System.out.print("ì‚­ì œí•  ê¸€ ë²ˆí˜¸ : ");
+        System.out.print("»èÁ¦ÇÒ ±Û ¹øÈ£ : ");
         int bNo = sc.nextInt();
         Board b = list.get(bNo - 1);
-        System.out.print("ì •ë§ë¡œ ì‚­ì œí•˜ì‹œê² ìŠµë‹ˆê¹Œ? (y/n) : ");
+        System.out.print("Á¤¸»·Î »èÁ¦ÇÏ½Ã°Ú½À´Ï±î? (y/n) : ");
         if (sc.next().toUpperCase().charAt(0) == 'Y') {
             list.remove(bNo - 1);
-            System.out.println(bNo + "ë²ˆ ê¸€ì´ ì‚­ì œë˜ì—ˆìŠµë‹ˆë‹¤.");
+            System.out.println(bNo + "¹ø ±ÛÀÌ »èÁ¦µÇ¾ú½À´Ï´Ù.");
         }
     }
 
     public void searchBoard() {
-        System.out.println("ê²€ìƒ‰í•  ì œëª© : ");
+        System.out.println("°Ë»öÇÒ Á¦¸ñ : ");
         String title = sc.nextLine();
 
         for (Board board : list) {
@@ -138,21 +157,21 @@ public class BoardManager {
                 list.sort(new DescBoardNo());
 
             }else {
-                list.sort(new AscBoardNo());
+                list.sort(new AcsBoardNo());
             }
         } else if (item == 2) {
             if (isDesc) {
                 list.sort(new DescBoardDate());
 
             } else {
-                list.sort(new AscBoardDate());
+                list.sort(new AcsBoardDate());
             }
         } else if (item == 3) {
             if (isDesc) {
                 list.sort(new DescBoardTitle());
 
             } else {
-                list.sort(new AscBoardTitle());
+                list.sort(new AcsBoardTitle());
             }
         }
     }

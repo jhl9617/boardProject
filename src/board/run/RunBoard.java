@@ -1,6 +1,5 @@
 package board.run;
 
-import board.controller.BoardManager;
 import board.view.BoardMenu;
 
 public class RunBoard {
